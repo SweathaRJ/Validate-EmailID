@@ -2,6 +2,8 @@ package validateEmailID;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class searchElement {
 	
@@ -16,18 +18,21 @@ public class searchElement {
 		emailID.add("hithvik.crazy@mno.com");
 		emailID.add("smileyamef1@xyz.com");
 		emailID.add("appu.sai@abc.com");
-		
-		Scanner sc=new Scanner(System.in);
+		String searchElement;
 		System.out.println("Enter emailID : ");
-	    String searchElement=sc.nextLine();
+		Scanner sc=new Scanner(System.in);
+		searchElement=sc.nextLine();
+		String regex = "^(.+)@(.+)$";
+		Matcher match=Pattern.compile(regex).matcher(searchElement);
 		 
-		if(emailID.contains(searchElement)) {
+		if(match.matches() && emailID.stream().anyMatch(mail -> mail.equals(searchElement))) {
 			System.out.println("email ID " + searchElement + " is found");
 		}
 			else {
 				System.out.println("email ID" + searchElement + " is not found");
 			
 		}
+		sc.close();
 		
 		
 		
